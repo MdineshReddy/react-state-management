@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { calculateTotals, getCartItems } from "./actions/cartActions";
+import CartContainer from "./components/CartContainer";
+import { RootState } from "./store";
+import Confirmation from "./components/Confirmation";
+import Loader from "./components/Loader";
+import Toast from "./components/Toast";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart);
+  const { showConfirm } = useSelector((state: RootState) => state.confirm);
+  const { showLoader } = useSelector((state: RootState) => state.loading);
+
+  useEffect(() => {
+    //@ts-ignore
+    dispatch(getCartItems());
+  }, []);
+
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [cart.cartItems]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <CartContainer />
+      {showConfirm && <Confirmation />}
+      {showLoader && <Loader />}
+      <Toast />
     </div>
   );
-}
+};
 
 export default App;
