@@ -22,6 +22,7 @@ const Toast = () => {
   useEffect(() => {
     // @ts-ignore
     notify(msg, success);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg]);
 
   return (

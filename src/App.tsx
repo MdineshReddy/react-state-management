@@ -17,10 +17,12 @@ const App = () => {
   useEffect(() => {
     //@ts-ignore
     dispatch(getCartItems());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(calculateTotals());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart.cartItems]);
 
   return (
