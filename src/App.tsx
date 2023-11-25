@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateTotals, getCartItems } from "./actions/cartActions";
+import { calculateTotals, getCartItems } from "./features/cartSlice";
 import CartContainer from "./components/CartContainer";
 import { RootState } from "./store";
 import Confirmation from "./components/Confirmation";
@@ -12,15 +12,17 @@ const App = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
   const { showConfirm } = useSelector((state: RootState) => state.confirm);
-  const { showLoader } = useSelector((state: RootState) => state.loading);
+  const { showLoader } = useSelector((state: RootState) => state.loader);
 
   useEffect(() => {
     //@ts-ignore
     dispatch(getCartItems());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(calculateTotals());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart.cartItems]);
 
   return (

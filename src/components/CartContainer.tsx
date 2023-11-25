@@ -1,7 +1,7 @@
 import React from "react";
 import CartItem from "./CartItem";
 import { useSelector, useDispatch } from "react-redux";
-import { showConfirmation } from "../actions/confirmActions";
+import { showConfirm } from "../features/confirmSlice";
 import { RootState } from "../store";
 
 const CartContainer = () => {
@@ -39,7 +39,7 @@ const CartContainer = () => {
           </h4>
           <button
             className="btn clear-btn"
-            onClick={() => dispatch(showConfirmation())}
+            onClick={() => dispatch(showConfirm())}
           >
             Clear Cart
           </button>

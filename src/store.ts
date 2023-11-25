@@ -1,13 +1,17 @@
-import { createStore, applyMiddleware } from "redux";
-import reducers from "./reducers";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import cartSlice from "./features/cartSlice";
+import confirmSlice from "./features/confirmSlice";
+import loaderSlice from "./features/loaderSlice";
+import toastSlice from "./features/toastSlice";
 
-// Enable Redux DevTools Extension
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// Create the store with middleware
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const store = configureStore({
+  reducer: {
+    cart: cartSlice,
+    confirm: confirmSlice,
+    loader: loaderSlice,
+    toast: toastSlice,
+  },
+});
 
 export default store;
 

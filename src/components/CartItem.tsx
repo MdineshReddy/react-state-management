@@ -1,11 +1,7 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "../icons";
 import { useDispatch } from "react-redux";
-import {
-  increaseCartItemCount,
-  decreaseCartItemCount,
-  removeCartItem,
-} from "../actions/cartActions";
+import { increase, decrease, remove } from "../features/cartSlice";
 import { CartItem as CartItemInterface } from "../cartItems";
 
 const CartItem: React.FC<CartItemInterface> = ({
@@ -22,18 +18,12 @@ const CartItem: React.FC<CartItemInterface> = ({
       <div>
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
-        <button
-          className="remove-btn"
-          onClick={() => dispatch(removeCartItem(id))}
-        >
+        <button className="remove-btn" onClick={() => dispatch(remove(id))}>
           remove
         </button>
       </div>
       <div>
-        <button
-          className="amount-btn"
-          onClick={() => dispatch(increaseCartItemCount(id))}
-        >
+        <button className="amount-btn" onClick={() => dispatch(increase(id))}>
           <ChevronUp />
         </button>
         <p className="amount">{amount}</p>
@@ -41,9 +31,9 @@ const CartItem: React.FC<CartItemInterface> = ({
           className="amount-btn"
           onClick={() => {
             if (amount === 1) {
-              dispatch(removeCartItem(id));
+              dispatch(remove(id));
             } else {
-              dispatch(decreaseCartItemCount(id));
+              dispatch(decrease(id));
             }
           }}
         >

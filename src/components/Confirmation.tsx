@@ -1,6 +1,6 @@
 import React from "react";
-import { hideConfirmation } from "../actions/confirmActions";
-import { clearCart } from "../actions/cartActions";
+import { hideConfirm } from "../features/confirmSlice";
+import { clearCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 const Confirmation = () => {
@@ -14,7 +14,7 @@ const Confirmation = () => {
             className="btn confirm-btn"
             onClick={() => {
               dispatch(clearCart());
-              dispatch(hideConfirmation());
+              dispatch(hideConfirm());
             }}
           >
             confirm
@@ -22,7 +22,7 @@ const Confirmation = () => {
           <button
             className="btn clear-btn"
             onClick={() => {
-              dispatch(hideConfirmation());
+              dispatch(hideConfirm());
             }}
           >
             cancel
